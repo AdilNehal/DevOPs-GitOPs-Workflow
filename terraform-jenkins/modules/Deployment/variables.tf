@@ -8,22 +8,16 @@ variable "namespace" {
   type     = string
 }
 
-variable "jenkins_port" {
+variable "jenkins_ports" {
   description = "Jenkins Port"
-  type        = number
-  default     = 8080
+  type        = list
 }
 
-variable "jnlp_port" {
-  description = "Jenkins Port"
-  type        = number
-  default     = 50000
-}
 
 variable "type" {
   description = "Jenkins service type"
   type     = string
-  default  = "ClusterIP"
+  default  = "NodePort"
 }
 
 variable "image" {

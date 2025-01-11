@@ -76,16 +76,19 @@ variable "jenkins_image" {
   default     = "jenkins/jenkins:lts"
 }
 
-variable "jenkins_port" {
-  description = "Jenkins Port"
-  type        = number
-  default     = 8080
-}
-
-variable "jnlp_port" {
-  description = "Jenkins Port"
-  type        = number
-  default     = 50000
+variable "jenkins_ports" {
+  description = "Jenkins Ports"
+  type        = list(any)
+  default     = [
+    {
+      container_port = 8080,
+      name           = "http"
+    },
+    {
+      container_port = 50000,
+      name           = "jnlp"
+    }
+  ]
 }
 
 variable "jenkins_volumes_mounts" {

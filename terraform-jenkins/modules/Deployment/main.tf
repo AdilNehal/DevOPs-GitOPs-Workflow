@@ -13,33 +13,16 @@ resource "kubernetes_service_v1" "jenkins_service" {
       app = var.name
     }
 
-		port {
-			port = var.jenkins_port
-		}
+
+    dynamic "port" {
+      for_each = var.jenkins_ports
+      content {
+        name = port.value["name"]
+        port = port.value["container_port"]
+      }
+    } 
+  
     external_ips = var.external_ips
-    type = var.type
-  }
-}
-
-resource "kubernetes_service_v1" "jnlp_service" {
-
-  metadata {
-    name      = "${var.name}-jnlp-service"
-    namespace = var.namespace
-    labels = {
-      name = "${var.name}-jnlp-service"
-    }
-  }
-
-  spec {
-    selector = {
-      app = var.name
-    }
-
-		port {
-			port = var.jnlp_port
-		}
-
     type = var.type
   }
 }
@@ -77,12 +60,15 @@ resource "kubernetes_deployment_v1" "jenkins_deployment" {
         container {
           image = var.image
           name  = var.name
-          port {
-            container_port = 8080
-          }
-          port {
-            container_port = 50000
-          }
+          
+          dynamic "port" {
+            for_each = var.jenkins_ports
+            content {
+              name = port.value["name"]
+              container_port = port.value["container_port"]
+            }
+          } 
+
           dynamic "volume_mount" {
             for_each = var.volume_mounts
             content {

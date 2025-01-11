@@ -46,8 +46,7 @@ module "jenkins" {
   namespace          = var.namespace
   image              = var.jenkins_image
   name               = var.jenkins_name
-  jenkins_port       = var.jenkins_port
-  jnlp_port          = var.jnlp_port
+  jenkins_ports       = var.jenkins_ports
   volume_mounts      = var.jenkins_volumes_mounts
   claim_name         = var.jenkins_pvc_name
   service_account_name = module.role.jenkins_service_account_name
