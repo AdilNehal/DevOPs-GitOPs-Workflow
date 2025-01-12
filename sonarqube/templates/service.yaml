@@ -23,7 +23,7 @@ spec:
       {{- if .Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
       {{- end }}
-  {{- if has .Values.service "externalIPs" }}
+  {{- if .Values.service.externalIPs }}
   externalIPs:
     {{- range .Values.service.externalIPs }}
     - {{ . }}
