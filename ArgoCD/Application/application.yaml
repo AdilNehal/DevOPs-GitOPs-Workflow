@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: python-app
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: demo
+    server: "https://kubernetes.default.svc"
+  project: project1
+  source: 
+    path: helm-charts-deployment/python-app
+    repoURL: "https://github.com/AdilNehal/Python-CI-CD.git"
+    targetRevision: main
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true

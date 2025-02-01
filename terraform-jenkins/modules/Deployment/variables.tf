@@ -43,5 +43,5 @@ variable "service_account_name" {
 variable "external_ips" {
   description = "External IPs"
   type     = list(string)
-  default  = [ "192.168.49.2" ]
+  default  = [ "192.168.100.62" ]
 }

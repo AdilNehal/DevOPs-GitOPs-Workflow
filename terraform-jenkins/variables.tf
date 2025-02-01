@@ -99,6 +99,11 @@ variable "jenkins_volumes_mounts" {
       mount_path = "/var/jenkins_home",
       name       = "jenkins-volume",
       sub_path   = "jenkins"
+    },
+    {
+      mount_path = "/var/run/docker.sock",
+      name       = "docker-socket",
+      sub_path   = ""
     }
   ]
 }

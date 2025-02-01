@@ -85,6 +85,13 @@ resource "kubernetes_deployment_v1" "jenkins_deployment" {
             claim_name = var.claim_name
           }
 				}
+
+        volume {
+          name = "docker-socket"
+          host_path {
+            path = "/var/run/docker.sock"
+          }
+        }
       }
     }
   }
