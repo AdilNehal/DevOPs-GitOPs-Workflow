@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"istio-gateway","Source":"./modules/Gateway","Dir":"modules/Gateway"},{"Key":"istio-route","Source":"./modules/Route","Dir":"modules/Route"}]}
