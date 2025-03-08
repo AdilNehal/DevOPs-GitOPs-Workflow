@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: jenkins-scaler
+  namespace: ci
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: jenkins
+  minReplicaCount: 0
+  maxReplicaCount: 1
+  cooldownPeriod: 300  # Keep Jenkins running for 5 minutes after last activity
+  pollingInterval: 15  # Check Prometheus metrics every 15 seconds
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: "http://prometheus-server.monitoring.svc:9090"
+        query: "( jenkins_executor_in_use_value / jenkins_executor_count_value ) * 100"
+        threshold: "80"  # Scale when executor usage exceeds 80%

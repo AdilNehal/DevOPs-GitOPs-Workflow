@@ -1,0 +1,18 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: jenkins-scaler
+  namespace: ci
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: jenkins
+  minReplicaCount: 0
+  maxReplicaCount: 1
+  cooldownPeriod: 300  # Keep Jenkins running for 5 minutes after the last CPU activity
+  pollingInterval: 15
+  triggers:
+    - type: cpu
+      metadata:
+        type: Utilization
+        value: "10"  # Scale Jenkins up when CPU usage exceeds 10%
