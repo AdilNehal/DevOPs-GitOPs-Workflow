@@ -814,7 +814,16 @@ serverFiles:
           insecure_skip_verify: true
         static_configs:
           - targets: 
-            - 192.168.100.62:8001        
+            - 192.168.100.62:8001
+      - job_name: node-app
+        metrics_path: /node-metrics/
+        scrape_interval: 300s
+        scrape_timeout: 30s
+        tls_config:
+          insecure_skip_verify: true
+        static_configs:
+          - targets: 
+            - 192.168.100.62:3000        
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
