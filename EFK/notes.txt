@@ -1,0 +1,46 @@
+The include function in Helm templates is used to call and include the output of another template (often a helper template) within a chart.
+
+{{ include "template-name" . }}
+
+_helpers.tpl
+
+{{- define "mychart.fullname" -}}
+{{ .Release.Name }}-{{ .Chart.Name }}
+{{- end -}}
+
+Now, in a deployment file (deployment.yaml):
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+
+---
+
+The with function in Helm templates is used to change the context (.) within a block, making it easier to access nested values without repeatedly specifying the full path.
+
+with replaces . with <value> inside the block.
+
+This is useful for working with deeply nested values.
+
+values.yaml
+
+app:
+  name: my-app
+  replicaCount: 3
+
+deployment.yaml
+
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+
+You can nest with blocks for deeply nested structures.
+
+{{- with .Values.app.database }}
+database:
+  name: {{ .name }}
+  user: {{ .user }}
+{{- end }}
+
