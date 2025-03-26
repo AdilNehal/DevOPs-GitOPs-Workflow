@@ -127,6 +127,7 @@ affinity: {}
 
 StatefulSet:
   serviceName: elasticsearch
+  namespace: monitoring
   replicas: 1
   image:
     repository: docker.elastic.co/elasticsearch/elasticsearch

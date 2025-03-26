@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "elasticsearch.fullname" . }}
+  namespace: {{ .Values.StatefulSet.namespace }}
   labels:
     app.kubernetes.io/name: {{ include "elasticsearch.name" . }}
     helm.sh/chart: {{ include "elasticsearch.chart" . }}
