@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: daemonset
+metadata:
+  name: {{ include "fluentd.fullname" . }}
+  namespace: {{ .Values.daemonset.namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "fluentd.name" . }}
+    helm.sh/chart: {{ include "fluentd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "fluentd.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "fluentd.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+			serviceAccount: {{ include "fluentd.serviceAccountName" . }}
+			serviceAccountName: {{ include "fluentd.serviceAccountName" . }}
+			terminationGracePeriodSeconds: namespace: {{ .Values.daemonset.terminationGracePeriodSeconds }}
+      containers:
+        - name: {{ include "fluentd.fullname" . }}
+          image: "{{ .Values.daemonset.image.repository }}:{{ .Values.daemonset.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.daemonset.resources | nindent 12 }}
+          ports:
+            {{- range .Values.daemonset.portsSettings }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+            {{- end }}
+          {{- if hasKey .Values.daemonset "livenessProbe" }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if hasKey .Values.daemonset "readinessProbe" }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if hasKey .Values.daemonset "volumeMounts" }}
+          volumeMounts:
+            {{- toYaml .Values.daemonset.volumeMounts | nindent 12 }}
+          {{- end }}
+          env: 
+            {{- range .Values.daemonset.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
