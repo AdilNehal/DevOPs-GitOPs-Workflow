@@ -21,18 +21,20 @@ spec:
     spec:
 			serviceAccount: {{ include "fluentd.serviceAccountName" . }}
 			serviceAccountName: {{ include "fluentd.serviceAccountName" . }}
-			terminationGracePeriodSeconds: namespace: {{ .Values.daemonset.terminationGracePeriodSeconds }}
+			terminationGracePeriodSeconds: {{ .Values.daemonset.terminationGracePeriodSeconds }}
       containers:
         - name: {{ include "fluentd.fullname" . }}
           image: "{{ .Values.daemonset.image.repository }}:{{ .Values.daemonset.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.daemonset.resources | nindent 12 }}
+          {{- if hasKey .Values.daemonset "portsSettings" }}
           ports:
             {{- range .Values.daemonset.portsSettings }}
             - name: {{ .name }}
               containerPort: {{ .port }}
             {{- end }}
+          {{- end }}
           {{- if hasKey .Values.daemonset "livenessProbe" }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}

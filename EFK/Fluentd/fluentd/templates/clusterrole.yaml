@@ -17,3 +17,5 @@ rules:
   {{- end }}
   verbs:
   {{- range .Values.clusterRole.verbs }}
+  - {{ . }}
+  {{- end }}
