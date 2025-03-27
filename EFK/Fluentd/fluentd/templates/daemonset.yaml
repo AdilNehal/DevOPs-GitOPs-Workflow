@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: daemonset
+kind: DaemonSet
 metadata:
   name: {{ include "fluentd.fullname" . }}
   namespace: {{ .Values.daemonset.namespace }}
@@ -19,9 +19,9 @@ spec:
         app.kubernetes.io/name: {{ include "fluentd.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-			serviceAccount: {{ include "fluentd.serviceAccountName" . }}
-			serviceAccountName: {{ include "fluentd.serviceAccountName" . }}
-			terminationGracePeriodSeconds: {{ .Values.daemonset.terminationGracePeriodSeconds }}
+      serviceAccount: {{ include "fluentd.serviceAccountName" . }}
+      serviceAccountName: {{ include "fluentd.serviceAccountName" . }}
+      terminationGracePeriodSeconds: {{ .Values.daemonset.terminationGracePeriodSeconds }}
       containers:
         - name: {{ include "fluentd.fullname" . }}
           image: "{{ .Values.daemonset.image.repository }}:{{ .Values.daemonset.image.tag | default .Chart.AppVersion }}"
@@ -37,11 +37,11 @@ spec:
           {{- end }}
           {{- if hasKey .Values.daemonset "livenessProbe" }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.daemonset.livenessProbe | nindent 12 }}
           {{- end }}
           {{- if hasKey .Values.daemonset "readinessProbe" }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.daemonset.readinessProbe | nindent 12 }}
           {{- end }}
           {{- if hasKey .Values.daemonset "volumeMounts" }}
           volumeMounts:
