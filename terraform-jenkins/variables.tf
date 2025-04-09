@@ -43,7 +43,7 @@ variable "jenkins_pv_storage_class_name" {
 variable "jenkins_pv_persistent_volume_sources_path" {
   description = "Persistent Volume storage hostpath path"
   type        = string
-  default     = "/home/adil-nehal/jenkins-pv"
+  default     = "/srv/nfs/kubedata/jenkins-pv"
 }
 
 variable "jenkins_pvc_name" {
