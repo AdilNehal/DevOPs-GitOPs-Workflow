@@ -93,8 +93,8 @@ elasticsearch:
   bootstrapChecks: true
 
 service:
-  type: LoadBalancer
-  externalIPs: ["192.168.100.62"]
+  type: NodePort
+  externalIPs: ["172.16.116.129"]
   externalPort: 9000
   internalPort: 9000
   labels:
