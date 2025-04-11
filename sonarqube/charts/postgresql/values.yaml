@@ -504,7 +504,9 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: "local-path"
+  storageClass: ""
+
+  storageClassName: "local-path"
   ## @param persistence.accessModes PVC Access Mode for PostgreSQL volume
   ##
   accessModes:
