@@ -485,6 +485,10 @@ persistence:
   uid: 1000
   guid: 0
 
+  volume:
+    path: /srv/nfs/kubedata/sonarqube
+    storage: 2Gi
+
   ## DEPRECATED please use root level extraVolumes value
   ## Specify extra volumes. Refer to ".spec.volumes" specification : https://kubernetes.io/fr/docs/concepts/storage/volumes/
   volumes: []
