@@ -17,5 +17,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""  # Important: empty means no dynamic provisioning is expected
-  local:
+  hostPath:
     path: {{ .Values.persistence.volume.path }}
