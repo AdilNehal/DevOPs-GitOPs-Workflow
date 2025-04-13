@@ -4,7 +4,7 @@ metadata:
   name: monitoring
   namespace: argocd
 spec:
-  description: deploy python app in demo namespace.
+  description: deploy monitoring tools in the namespace.
   sourceRepos: 
     - "*"
   destinations:
