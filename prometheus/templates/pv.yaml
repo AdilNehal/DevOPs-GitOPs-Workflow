@@ -1,0 +1,21 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ template "prometheus.server.fullname" . }}-pv
+  labels:
+    {{- include "prometheus.server.labels" . | nindent 4 }}
+  {{- if .Values.persistence-vol.annotations }}
+  annotations:
+    {{- range $key, $value := .Values.persistence-vol.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  capacity:
+    storage: {{ .Values.persistence-vol.volume.storage }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""  # Important: empty means no dynamic provisioning is expected
+  hostPath:
+    path: {{ .Values.persistence-vol.volume.path }}
