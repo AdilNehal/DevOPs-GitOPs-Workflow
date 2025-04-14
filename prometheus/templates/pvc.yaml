@@ -23,4 +23,3 @@ spec:
   {{- end }}
   {{- end }}
   volumeName: {{ template "prometheus.server.fullname" . }}-pv
-{{- end }}
