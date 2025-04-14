@@ -3,9 +3,9 @@ apiVersion: v1
 metadata:
   name: {{ template "prometheus.server.fullname" . }}
   labels: {{- include "prometheus.server.labels" . | nindent 4 }}
-  {{- if .Values.persistence.annotations }}
+  {{- if .Values.persistentVolume.annotations }}
   annotations:
-    {{- range $key, $value := .Values.persistence.annotations }}
+    {{- range $key, $value := .Values.persistentVolume.annotations }}
     {{ $key }}: {{ $value | quote }}
     {{- end }}
   {{- end }}
@@ -15,11 +15,11 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistentVolume.size | quote }}
-  {{- if .Values.persistence.storageClass }}
-  {{- if (eq "-" .Values.persistence.storageClass) }}
+  {{- if .Values.persistentVolume.storageClass }}
+  {{- if (eq "-" .Values.persistentVolume.storageClass) }}
   storageClassName: ""
   {{- else }}
-  storageClassName: "{{ .Values.persistence.storageClass }}"
+  storageClassName: "{{ .Values.persistentVolume.storageClass }}"
   {{- end }}
   {{- end }}
   volumeName: {{ template "prometheus.server.fullname" . }}-pv
