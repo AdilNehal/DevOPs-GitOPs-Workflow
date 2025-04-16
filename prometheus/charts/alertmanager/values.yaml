@@ -273,6 +273,8 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 50Mi
+  mountPath: /srv/nfs/kubedata/alertmanager
+  annotations: {}
 
 configAnnotations: {}
   ## For example if you want to provide private data from a secret vault
