@@ -4,18 +4,18 @@ metadata:
   name: {{ template "prometheus.server.fullname" . }}-pv
   labels:
     {{- include "prometheus.server.labels" . | nindent 4 }}
-  {{- if .Values.persistentVolume.annotations }}
+  {{- if .Values.server.persistentVolume.annotations }}
   annotations:
-    {{- range $key, $value := .Values.persistentVolume.annotations }}
+    {{- range $key, $value := .Values.server.persistentVolume.annotations }}
     {{ $key }}: {{ $value | quote }}
     {{- end }}
   {{- end }}
 spec:
   capacity:
-    storage: {{ .Values.persistentVolume.size }}
+    storage: {{ .Values.server.persistentVolume.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""  # Important: empty means no dynamic provisioning is expected
   hostPath:
-    path: {{ .Values.persistentVolume.mountPath }}
+    path: {{ .Values.server.persistentVolume.mountPath }}
