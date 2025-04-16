@@ -1,0 +1,26 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "prometheus.server.fullname" . }}-pvc
+  labels: {{- include "prometheus.server.labels" . | nindent 4 }}
+  {{- if Values.server.persistentVolume.annotations }}
+  annotations:
+    {{- range $key, $value := Values.server.persistentVolume.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  accessModes:
+    - {{ Values.server.persistentVolume.accessModes | quote }}
+  resources:
+    requests:
+      storage: {{ Values.server.persistentVolume.size | quote }}
+  {{- if Values.server.persistentVolume.storageClass }}
+  {{- if (eq "-" Values.server.persistentVolume.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+  {{- end }}
+  {{- end }}
+  volumeName: {{ template "prometheus.server.fullname" . }}-pv
+{{- end }}
