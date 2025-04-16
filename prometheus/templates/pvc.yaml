@@ -11,7 +11,7 @@ metadata:
   {{- end }}
 spec:
   accessModes:
-    - {{ .Values.server.persistentVolume.accessMode | quote }}
+    - {{ .Values.server.persistentVolume.accessModes | quote }}
   resources:
     requests:
       storage: {{ .Values.server.persistentVolume.size | quote }}
