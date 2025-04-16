@@ -424,6 +424,7 @@ spec:
         storageClassName: "{{ .Values.server.persistentVolume.storageClass }}"
       {{- end }}
       {{- end }}
+        volumeName: {{ template "prometheus.server.fullname" . }}-pv
 {{- else }}
         - name: storage-volume
           emptyDir:
