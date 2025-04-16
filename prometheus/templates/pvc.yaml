@@ -3,23 +3,23 @@ apiVersion: v1
 metadata:
   name: {{ template "prometheus.server.fullname" . }}
   labels: {{- include "prometheus.server.labels" . | nindent 4 }}
-  {{- if .Values.persistentVolume.annotations }}
+  {{- if .Values.server.persistentVolume.annotations }}
   annotations:
-    {{- range $key, $value := .Values.persistentVolume.annotations }}
+    {{- range $key, $value := .Values.server.persistentVolume.annotations }}
     {{ $key }}: {{ $value | quote }}
     {{- end }}
   {{- end }}
 spec:
   accessModes:
-    - {{ .Values.persistentVolume.accessMode | quote }}
+    - {{ .Values.server.persistentVolume.accessMode | quote }}
   resources:
     requests:
-      storage: {{ .Values.persistentVolume.size | quote }}
-  {{- if .Values.persistentVolume.storageClass }}
-  {{- if (eq "-" .Values.persistentVolume.storageClass) }}
+      storage: {{ .Values.server.persistentVolume.size | quote }}
+  {{- if .Values.server.persistentVolume.storageClass }}
+  {{- if (eq "-" .Values.server.persistentVolume.storageClass) }}
   storageClassName: ""
   {{- else }}
-  storageClassName: "{{ .Values.persistentVolume.storageClass }}"
+  storageClassName: "{{ .Values.server.persistentVolume.storageClass }}"
   {{- end }}
   {{- end }}
   volumeName: {{ template "prometheus.server.fullname" . }}-pv
