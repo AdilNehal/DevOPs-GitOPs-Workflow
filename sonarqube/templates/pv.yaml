@@ -1,21 +1,21 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: {{ template "sonarqube.fullname" . }}-pv
-  labels:
-    {{- include "sonarqube.labels" . | nindent 4 }}
-  {{- if .Values.persistence.annotations }}
-  annotations:
-    {{- range $key, $value := .Values.persistence.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-  {{- end }}
-spec:
-  capacity:
-    storage: {{ .Values.persistence.volume.storage }}
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: ""  # Important: empty means no dynamic provisioning is expected
-  hostPath:
-    path: {{ .Values.persistence.volume.path }}
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: {{ template "sonarqube.fullname" . }}-pv
+#   labels:
+#     {{- include "sonarqube.labels" . | nindent 4 }}
+#   {{- if .Values.persistence.annotations }}
+#   annotations:
+#     {{- range $key, $value := .Values.persistence.annotations }}
+#     {{ $key }}: {{ $value | quote }}
+#     {{- end }}
+#   {{- end }}
+# spec:
+#   capacity:
+#     storage: {{ .Values.persistence.volume.storage }}
+#   accessModes:
+#     - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: ""  # Important: empty means no dynamic provisioning is expected
+#   hostPath:
+#     path: {{ .Values.persistence.volume.path }}
