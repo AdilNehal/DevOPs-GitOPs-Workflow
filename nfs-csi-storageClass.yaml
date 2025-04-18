@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-csi
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 172.16.116.129    # e.g., 192.168.1.10 (your master node)
+  share: /srv/nfs/kubedata                   # the NFS export path
+reclaimPolicy: Retain
+volumeBindingMode: Immediate

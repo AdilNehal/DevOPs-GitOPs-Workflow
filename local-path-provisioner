@@ -7,3 +7,8 @@ https://kubernetes.io/docs/concepts/storage/storage-classes/
 You can create a PersistentVolumeClaim without specifying a storageClassName for the new PVC, and you can do so even when no default StorageClass exists in your cluster. In this case, the new PVC creates as you defined it, and the storageClassName of that PVC remains unset until a default becomes available.
 
 You can have a cluster without any default StorageClass. If you don't mark any StorageClass as default (and one hasn't been set for you by, for example, a cloud provider), then Kubernetes cannot apply that defaulting for PersistentVolumeClaims that need it.
+
+
+This is a repository for NFS CSI driver, csi plugin name: nfs.csi.k8s.io. This driver requires existing and already configured NFSv3 or NFSv4 server, it supports dynamic provisioning of Persistent Volumes via Persistent Volume Claims by creating a new sub directory under NFS server.
+
+curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/v4.11.0/deploy/install-driver.sh | bash -s v4.11.0 --
