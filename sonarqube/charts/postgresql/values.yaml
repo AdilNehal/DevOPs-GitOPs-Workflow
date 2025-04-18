@@ -504,9 +504,9 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: nfs-csi
+  storageClass: "nfs-csi"
 
-  storageClassName: nfs-csi
+  storageClassName: "nfs-csi"
   ## @param persistence.accessModes PVC Access Mode for PostgreSQL volume
   ##
   accessModes:
