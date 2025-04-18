@@ -506,7 +506,6 @@ persistence:
   ##
   storageClass: "nfs-csi"
 
-  storageClassName: "nfs-csi"
   ## @param persistence.accessModes PVC Access Mode for PostgreSQL volume
   ##
   accessModes:
