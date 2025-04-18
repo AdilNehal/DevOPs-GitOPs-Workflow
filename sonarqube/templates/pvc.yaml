@@ -23,5 +23,4 @@ spec:
   storageClassName: "{{ .Values.persistence.storageClass }}"
   {{- end }}
   {{- end }}
-  # volumeName: {{ template "sonarqube.fullname" . }}-pv
 {{- end }}
