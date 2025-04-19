@@ -16,3 +16,13 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
+  helm:
+    valueFiles:
+    - values.yaml
+    parameters:
+    - name: postgresql.enabled
+      value: "false"
+    - name: nginx.enabled
+      value: "false"
+    - name: ingress-nginx.enabled
+      value: "false"
