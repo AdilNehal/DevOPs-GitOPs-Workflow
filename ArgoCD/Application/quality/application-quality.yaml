@@ -12,17 +12,17 @@ spec:
     path: sonarqube
     repoURL: "https://github.com/AdilNehal/DevOPs-GitOPs-Workflow.git"
     targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: postgresql.enabled
+          value: "false"
+        - name: nginx.enabled
+          value: "false"
+        - name: ingress-nginx.enabled
+          value: "false"
   syncPolicy:
     automated: {}
     syncOptions:
       - CreateNamespace=true
-  helm:
-    valueFiles:
-    - values.yaml
-    parameters:
-    - name: postgresql.enabled
-      value: "false"
-    - name: nginx.enabled
-      value: "false"
-    - name: ingress-nginx.enabled
-      value: "false"
