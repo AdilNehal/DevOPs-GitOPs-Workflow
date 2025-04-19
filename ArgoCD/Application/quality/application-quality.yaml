@@ -17,7 +17,7 @@ spec:
         - values.yaml
       parameters:
         - name: postgresql.enabled
-          value: "false"
+          value: "true"
         - name: nginx.enabled
           value: "false"
         - name: ingress-nginx.enabled
