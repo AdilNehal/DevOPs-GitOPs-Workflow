@@ -22,6 +22,8 @@ spec:
           value: "false"
         - name: ingress-nginx.enabled
           value: "false"
+        - name: persistence.enabled
+          value: "false"
   syncPolicy:
     automated: {}
     syncOptions:
