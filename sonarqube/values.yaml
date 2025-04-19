@@ -479,7 +479,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: nfs-csi
+  storageClass: "nfs-csi"
   accessMode: ReadWriteOnce
   size: 2Gi
   uid: 1000
