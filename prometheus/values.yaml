@@ -497,7 +497,7 @@ server:
 
     ## Prometheus server data Persistent Volume mount root path
     ##
-    # mountPath: /srv/nfs/kubedata/prometheus
+    mountPath: ""
 
     ## Prometheus server data Persistent Volume size
     ##
