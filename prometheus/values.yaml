@@ -497,7 +497,7 @@ server:
 
     ## Prometheus server data Persistent Volume mount root path
     ##
-    mountPath: /srv/nfs/kubedata/prometheus
+    # mountPath: /srv/nfs/kubedata/prometheus
 
     ## Prometheus server data Persistent Volume size
     ##
@@ -510,7 +510,7 @@ server:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    # storageClass: "-"
+    storageClass: "nfs-csi"
 
     ## Prometheus server data Persistent Volume Binding Mode
     ## If defined, volumeBindingMode: <volumeBindingMode>
@@ -1364,6 +1364,7 @@ alertmanager:
 
   persistence:
     size: 2Gi
+    storageClass: "nfs-csi"
 
   podSecurityContext:
     runAsUser: 65534

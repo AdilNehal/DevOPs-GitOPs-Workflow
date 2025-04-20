@@ -269,11 +269,11 @@ persistence:
   ## If undefined (the default) or set to null, no storageClassName spec is
   ## set, choosing the default provisioner.
   ##
-  # storageClass: "-"
+  storageClass: "nfs-csi"
   accessModes:
     - ReadWriteOnce
   size: 50Mi
-  mountPath: /srv/nfs/kubedata/alertmanager
+  # mountPath: /srv/nfs/kubedata/alertmanager
   annotations: {}
 
 configAnnotations: {}
