@@ -537,7 +537,7 @@ server:
     ## Persistent Volume Name
     ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
     ##
-    volumeName: "metrics-pv"
+    # volumeName: "metrics-pv"
 
   emptyDir:
     ## Prometheus server emptyDir volume size limit
