@@ -250,7 +250,6 @@ spec:
         storageClassName: {{ .Values.persistence.storageClass }}
       {{- end }}
       {{- end }}
-        volumeName: {{ include "alertmanager.fullname" . }}-pv
   {{- else }}
         - name: storage
           emptyDir: {}
