@@ -759,7 +759,7 @@ alertmanager:
     #   port: 8082
     #   targetPort: 8082
 
-    externalIPs: []
+    externalIPs: ["172.16.116.129"]
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
 
@@ -1412,6 +1412,7 @@ grafana:
     portName: http-web
     ipFamilies: []
     ipFamilyPolicy: ""
+    externalIPs: ["172.16.116.129"]
 
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator
@@ -3022,7 +3023,7 @@ prometheusOperator:
     ## List of IP addresses at which the Prometheus server service is available
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
     ##
-    externalIPs: []
+    externalIPs: ["172.16.116.129"]
 
   # ## Labels to add to the operator deployment
   # ##
@@ -3491,7 +3492,7 @@ prometheus:
     ## List of IP addresses at which the Prometheus server service is available
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
     ##
-    externalIPs: []
+    externalIPs: ["172.16.116.129"]
 
     ## Port to expose on each node
     ## Only used if service.type is 'NodePort'
