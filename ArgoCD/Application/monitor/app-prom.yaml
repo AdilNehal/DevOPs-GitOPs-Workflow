@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   project: monitoring
   source: 
-    path: prometheus
+    path: kube-prometheus-stack
     repoURL: "https://github.com/AdilNehal/DevOPs-GitOPs-Workflow.git"
     targetRevision: main
   syncPolicy:
