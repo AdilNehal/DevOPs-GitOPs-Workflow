@@ -13,6 +13,8 @@ spec:
     repoURL: "https://github.com/AdilNehal/DevOPs-GitOPs-Workflow.git"
     targetRevision: main
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
