@@ -5,8 +5,10 @@ metadata:
   namespace: argocd
 spec: 
   destination: 
-    namespace: monitoring
-    server: "https://kubernetes.default.svc"
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
   project: monitoring
   source: 
     path: kube-prometheus-stack
