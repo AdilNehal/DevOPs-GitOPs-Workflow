@@ -1,5 +1,5 @@
 [master-node]
-172.16.116.129
+localhost
 
 [worker-node]
 172.16.116.133
