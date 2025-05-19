@@ -1,5 +1,2 @@
 [master-node]
 localhost ansible_connection=local
-
-[worker-node]
-172.16.116.133
