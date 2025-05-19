@@ -1,0 +1,5 @@
+- name: Root Playbook calling on master node ROLE
+  hosts: master-node
+  roles:
+    - role: components
+      when: not skipped
