@@ -2,4 +2,3 @@
   hosts: master-node
   roles:
     - role: components
-      # when: not skipped
