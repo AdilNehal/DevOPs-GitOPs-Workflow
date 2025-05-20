@@ -66,3 +66,38 @@
       fail:
         msg: "ArgoCD installation from kustomize failed. Stopping role execution."
 
+- name: Install KEDA via Helm with error handling
+  block:
+    - name: Add KEDA Helm repo
+      command: helm repo add kedacore https://kedacore.github.io/charts
+      register: add_keda_repo
+      failed_when: add_keda_repo.rc != 0
+
+    - name: Update Helm repositories
+      command: helm repo update
+      register: update_helm_repos
+      failed_when: update_helm_repos.rc != 0
+
+    - name: Install KEDA via Helm chart
+      command: >
+        helm install keda kedacore/keda --namespace keda --create-namespace
+      register: install_keda
+      failed_when: install_keda.rc != 0
+
+  rescue:
+    - name: Print failure message for KEDA installation
+      debug:
+        msg: "Failed to install KEDA. Check Helm repo, internet connectivity, or cluster access."
+
+    - name: Show Helm repo add command result (for debugging)
+      debug:
+        var: add_keda_repo
+
+    - name: Show Helm repo update result (for debugging)
+      debug:
+        var: update_helm_repos
+
+    - name: Show Helm install result (for debugging)
+      debug:
+        var: install_keda
+
