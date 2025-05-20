@@ -34,3 +34,35 @@
       fail:
         msg: "Sonarqube installation from local chart failed. Stopping role execution."
 
+- name: Installing Prometheus Stack via local Helm Chart
+  block:
+    - name: Install Prometheus Stack using local Helm chart and custom values
+      command: >
+        helm install monitoring /home/adiln/repos/DevOPs-GitOPs-Workflow/kube-prometheus-stack --namespace monitoring
+      register: helm_install_prometheus_stack
+      failed_when: helm_install_prometheus_stack.rc != 0
+
+  rescue:
+    - name: Print error message for Prometheus Stack installation failure
+      debug:
+        msg: "Prometheus Stack installation from local chart failed. Exiting the role."
+
+    - name: Fail the play for Prometheus Stack installation failure
+      fail:
+        msg: "Prometheus Stack installation from local chart failed. Stopping role execution
+
+- name: Apply ArgoCD CRDs using kubectl kustomize
+  command: >
+    kubectl apply -n cd -k https://github.com/argoproj/argo-cd/manifests/crds?ref=stable
+  register: apply_argocd_crds
+  failed_when: apply_argocd_crds.rc != 0
+
+  rescue:
+    - name: Print error message for ArgoCD installation failure
+      debug:
+        msg: "ArgoCD installation from kustomize failed. Exiting the role."
+
+    - name: Fail the play for ArgoCD installation failure
+      fail:
+        msg: "ArgoCD installation from kustomize failed. Stopping role execution."
+
