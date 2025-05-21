@@ -65,6 +65,7 @@ spec:
         labels:
           {{- include "elasticsearch.labels" . | nindent 8 }}
       spec:
+        storageClassName: {{ .Values.StatefulSet.volumeClaimTemplates.storageClassName }}
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
