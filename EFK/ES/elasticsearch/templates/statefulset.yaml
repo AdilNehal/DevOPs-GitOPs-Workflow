@@ -32,23 +32,37 @@ spec:
             - name: {{ .name }}
               containerPort: {{ .port }}
             {{- end }}
-          {{- if hasKey .Values.StatefulSet "livenessProbe" }}
+
+          {{- if .Values.StatefulSet.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.StatefulSet.livenessProbe | nindent 12 }}
           {{- end }}
-          {{- if hasKey .Values.StatefulSet "readinessProbe" }}
+
+          {{- if .Values.StatefulSet.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.StatefulSet.readinessProbe | nindent 12 }}
           {{- end }}
-          {{- if hasKey .Values.StatefulSet "volumeMounts" }}
+
+          {{- if .Values.StatefulSet.volumeMounts }}
           volumeMounts:
             {{- toYaml .Values.StatefulSet.volumeMounts | nindent 12 }}
           {{- end }}
-          env: 
+
+          {{- if .Values.StatefulSet.env }}
+          env:
             {{- range .Values.StatefulSet.env }}
             - name: {{ .name }}
+              {{- if .value }}
               value: {{ .value | quote }}
+              {{- end }}
+              {{- if .valueFrom }}
+              valueFrom:
+                {{- toYaml .valueFrom | nindent 16 }}
+              {{- end }}
             {{- end }}
+          {{- end }}
+
+      {{- if .Values.StatefulSet.initContainers }}
       initContainers:
         {{- range .Values.StatefulSet.initContainers }}
         - name: {{ .name }}
@@ -59,6 +73,8 @@ spec:
           volumeMounts:
             {{- toYaml .volumeMounts | nindent 12 }}
         {{- end }}
+      {{- end }}
+
   volumeClaimTemplates:
     - metadata:
         name: data
