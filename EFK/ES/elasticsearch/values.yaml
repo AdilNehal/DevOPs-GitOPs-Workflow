@@ -175,7 +175,8 @@ StatefulSet:
         privileged: true
     - name: increase-fd-ulimit
       image: busybox
-      command: ["sh", "-c", "ulimit -n 65536"]
+      command: ["/bin/sh"]
+      args: ["-c", "ulimit -n 65536"]
       securityContext:
         privileged: true
   portsSettings:
