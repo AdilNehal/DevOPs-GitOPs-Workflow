@@ -161,6 +161,14 @@ StatefulSet:
     
     - name: ES_JAVA_OPTS
       value: "-Xms512m -Xmx512m"
+    - name: xpack.security.enabled
+      value: "true"
+    - name: ELASTIC_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: logs-elasticsearch-credentials
+          key: elastic
+
   initContainers:
     - name: fix-permissions
       image: busybox
@@ -189,7 +197,9 @@ StatefulSet:
     - name: inter-node
       port: 9300
 
-
+auth:
+  # This is for setting up the elasticsearch user password more information can be found here: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html
+  elasticPassword: "changeme"
 
 deployment:
   # Specifies whether a deployment should be created
