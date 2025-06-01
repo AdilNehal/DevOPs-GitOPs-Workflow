@@ -166,7 +166,7 @@ StatefulSet:
     - name: ELASTIC_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: logs-elasticsearch-credentials
+          name: es-elasticsearch-credentials
           key: elastic
 
   initContainers:
