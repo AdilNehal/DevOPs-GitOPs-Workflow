@@ -30,7 +30,7 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
-  namespace: default
+  namespace: monitoring
 
 # This is for setting Kubernetes Annotations to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ 
@@ -140,12 +140,12 @@ daemonset:
   resources:
     requests:
       cpu: 100m
-    limits:
-      cpu: 100m
       memory: 200Mi
+    limits:
+      memory: 512Mi
   env:
     - name: FLUENT_ELASTICSEARCH_HOST
-      value: "elasticsearch.default.svc.cluster.local"
+      value: "logs-elasticsearch.default.svc.cluster.local"
     - name: FLUENT_ELASTICSEARCH_PORT
       value: "9200"
     - name: FLUENT_ELASTICSEARCH_SCHEME
