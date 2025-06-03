@@ -4291,11 +4291,11 @@ prometheus:
       - job_name: python-metrics
         metrics_path: '/metrics'
         static_configs:
-          - targets: ['localhost:8001']
+          - targets: ['172.16.116.129:8001']
       - job_name: node-metrics
         metrics_path: '/node-metrics'
         static_configs:
-          - targets: ['localhost:3000']
+          - targets: ['172.16.116.129:3000']
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
