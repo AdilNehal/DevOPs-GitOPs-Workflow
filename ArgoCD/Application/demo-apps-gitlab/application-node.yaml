@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   project: project1
   source: 
-    path: services/node-app
+    path: services/node-hello
     repoURL: "https://gitlab.com/adiln22/gitops-charts.git"
     targetRevision: main
   syncPolicy:
